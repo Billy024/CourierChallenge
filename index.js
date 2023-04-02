@@ -3,6 +3,8 @@ import {
   DETAIL_INPUT_QUANTITY,
   PACKAGE_INPUT_QUANTITY,
   PACKAGE_QUESTION,
+  VEHICLE_INPUT_QUANTITY,
+  VEHICLE_QUESTION,
 } from "./constants.js";
 import { offerCodes } from "./offerCodes.js";
 import { getDeliveryData } from "./util/utilDelivery.js";
@@ -20,6 +22,11 @@ const packageDataArray = await getPackagesData(
   deliveryData.no_of_packages,
   PACKAGE_QUESTION,
   PACKAGE_INPUT_QUANTITY
+);
+
+const vehicleDetail = await getVehicleData(
+  VEHICLE_QUESTION,
+  VEHICLE_INPUT_QUANTITY
 );
 
 const discountAndTotalCost = getDiscountAndTotalCost(

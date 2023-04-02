@@ -21,3 +21,11 @@ export class _discountedCost {
     this.total_cost = total_cost;
   }
 }
+
+export class vehicle {
+  constructor(no_of_vehicles, max_speed, max_carriable_weight) {
+    this.no_of_vehicles = no_of_vehicles;
+    this.max_speed = max_speed;
+    this.max_carriable_weight = max_carriable_weight;
+  }
+}
