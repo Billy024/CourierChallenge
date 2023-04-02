@@ -13,6 +13,7 @@ import {
   outputDiscountAndTotalCost,
 } from "./util/utilDiscount.js";
 import { getPackagesData } from "./util/utilPackage.js";
+import { getVehicleData } from "./util/utilVehicle.js";
 
 const deliveryData = await getDeliveryData(
   DELIVERY_QUESTION,
