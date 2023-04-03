@@ -14,7 +14,11 @@ export async function getVehicleData(vehicle_question, input_quantity) {
 export function getVehicleArray(vehicle_array_string) {
   const vehicle_array_int = vehicle_array_string.map((str) => parseInt(str));
   let vehicleData = [];
-  for (let vehicleCount = 0; i < vehicle_array_int[0]; vehicleCount++) {
+  for (
+    let vehicleCount = 0;
+    vehicleCount < vehicle_array_int[0];
+    vehicleCount++
+  ) {
     vehicleData.push(
       new vehicle(vehicle_array_int[1], vehicle_array_int[2], vehicleCount + 1)
     );
@@ -158,7 +162,7 @@ export function getMaximumNumberOfPackages(
 }
 
 export function updateDeliveryTimeforPackages(packages, vehicle) {
-  let packagesWithDeliveryTime = packages.map((_package) => {
+  let updatedPackages = packages.map((_package) => {
     const deliveryTime = parseFloat(
       (
         vehicle.available_after_time +
@@ -171,5 +175,5 @@ export function updateDeliveryTimeforPackages(packages, vehicle) {
       vehicle.id
     );
   });
-  return packagesWithDeliveryTime;
+  return updatedPackages;
 }
