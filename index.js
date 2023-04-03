@@ -44,4 +44,4 @@ const discountAndTotalCost = getDiscountAndTotalCost(
 let deliverySortedPackages = sortPackages(vehicleDataArray, packageDataArray);
 //need to handle delivery time of packages here
 
-outputDiscountAndTotalCost(discountAndTotalCost);
+outputDiscountAndTotalCost(discountAndTotalCost, deliverySortedPackages);

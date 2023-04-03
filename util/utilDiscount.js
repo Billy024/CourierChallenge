@@ -66,12 +66,12 @@ export function canUseOfferCode(
     });
 
   if (validity.length == 0) {
-    console.error("Invalid OfferCode included");
+    console.error(`OfferCode: ${offer_code} is invalid`);
     return false;
   }
 
   if (validity.length > 1) {
-    console.error("Duplicated OfferCode found");
+    console.error(`Duplicated OfferCode:${offer_code} found`);
     return false;
   }
   return validity[0];
@@ -88,14 +88,28 @@ export function getDiscountAmount(
   return parseFloat(((discountPercentage / 100) * total_cost).toFixed(2));
 }
 
-export function outputDiscountAndTotalCost(discountAndTotalCost) {
+export function outputDiscountAndTotalCost(
+  discountAndTotalCost,
+  deliverySortedPackages
+) {
   discountAndTotalCost.map((eachPackage) => {
+    let thisDeliverySortedPackage = deliverySortedPackages.filter(
+      (deliverySortedPackage) =>
+        deliverySortedPackage.id == eachPackage.package_id
+    )[0];
     let finalString = Object.values(eachPackage).reduce(
       (outputString, outputItem) => {
         return (outputString += `${outputItem} `);
       },
       ""
     );
-    console.log(finalString.trim());
+    if (thisDeliverySortedPackage?.delivery_time) {
+      console.log(
+        (finalString + `${thisDeliverySortedPackage.delivery_time}`).trim()
+      );
+    } else {
+      console.log(finalString.trim());
+    }
   });
 }
+// }
