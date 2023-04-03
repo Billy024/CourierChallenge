@@ -12,12 +12,12 @@ export async function getVehicleData(vehicle_question, input_quantity) {
 }
 
 export function getVehicleArray(vehicle_array_string) {
-  const no_of_vehicles = parseInt(vehicle_array_string[0]);
-  const max_speed = parseInt(vehicle_array_string[1]);
-  const max_carriable_weight = parseInt(vehicle_array_string[2]);
+  const vehicle_array_int = vehicle_array_string.map((str) => parseInt(str));
   let vehicleData = [];
-  for (let i = 0; i < no_of_vehicles; i++) {
-    vehicleData.push(new vehicle(max_speed, max_carriable_weight, i + 1));
+  for (let vehicleCount = 0; i < vehicle_array_int[0]; vehicleCount++) {
+    vehicleData.push(
+      new vehicle(vehicle_array_int[1], vehicle_array_int[2], vehicleCount + 1)
+    );
   }
   return vehicleData;
 }
