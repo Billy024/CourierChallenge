@@ -27,9 +27,13 @@ export function getVehicleArray(vehicle_array_string) {
 }
 
 export function sortPackages(vehicles, packagesArray) {
-  let unsortedPackages = packagesArray;
+  // let unsortedPackages = packagesArray;
   let vehiclesWithAvailability =
     initializeVehicleswithAvailabilityTime(vehicles);
+  let unsortedPackages = filterOverweightPackages(
+    packagesArray,
+    vehicles[0].max_carriable_weight
+  );
 
   while (unsortedPackages.length != 0) {
     vehiclesWithAvailability = sortVehiclesByAvailableAfterTime(
@@ -50,6 +54,17 @@ export function sortPackages(vehicles, packagesArray) {
       return !packageObject.maximised_packages.includes(unsortedPackage);
     });
   }
+}
+
+export function filterOverweightPackages(packagesArray, maxCarriableWeight) {
+  return packagesArray.filter((_package) => {
+    if (_package.weight > maxCarriableWeight) {
+      console.error(
+        `Package id: ${_package.id} is overweight and cannot be delivered`
+      );
+    }
+    _package.weight <= maxCarriableWeight;
+  });
 }
 
 export function getPackageSchedule(vehicle, remainingPackagesArray) {
