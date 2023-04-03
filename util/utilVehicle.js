@@ -22,26 +22,31 @@ export function getVehicleArray(vehicle_array_string) {
   return vehicleData;
 }
 
-//while loop to get second trip of vehicles
-//pending adding delivery time to each package (speed of vehicle * distance of package)
 export function sortPackages(vehicles, packagesArray) {
   let unsortedPackages = packagesArray;
   let vehiclesWithAvailability =
     initializeVehicleswithAvailabilityTime(vehicles);
 
   while (unsortedPackages.length != 0) {
-    let sortedVehiclesWithAvailability = sortVehiclesByAvailableAfterTime(
+    vehiclesWithAvailability = sortVehiclesByAvailableAfterTime(
       vehiclesWithAvailability
     );
-    let {
-      packagesWithDeliveryTime,
-      remainingPackages,
-      vehicleMaxDeliveryTime,
-    } = getPackageSchedule(sortedVehiclesWithAvailability[0], unsortedPackages);
-    sortedVehiclesWithAvailability[0].available_after_time =
-      vehicleMaxDeliveryTime;
-    unsortedPackages = remainingPackages;
-    vehiclesWithAvailability = sortedVehiclesWithAvailability;
+    const packageObject = getPackageSchedule(
+      vehiclesWithAvailability[0],
+      unsortedPackages
+    );
+    const packagesWithDeliveryTime = updateDeliveryTimeforPackages(
+      packageObject.maximised_packages,
+      vehiclesWithAvailability[0]
+    );
+    vehiclesWithAvailability[0].available_after_time = findMaxDeliveryTime(
+      packagesWithDeliveryTime
+    );
+    console.log(packagesWithDeliveryTime, "new package");
+    unsortedPackages = unsortedPackages.filter((unsortedPackage) => {
+      return !packageObject.maximised_packages.includes(unsortedPackage);
+    });
+    console.log(unsortedPackages, "unsortedPackages");
   }
 }
 
@@ -54,7 +59,7 @@ export function getPackageSchedule(vehicle, remainingPackagesArray) {
     remainingPackagesArray
   );
   let maximisedPackages = [];
-  const packageObject = findPackagesForMaximumWeight(
+  return findPackagesForMaximumWeight(
     descendingPackageArray,
     maximumNoOfPackages,
     vehicle.max_carriable_weight,
@@ -63,22 +68,6 @@ export function getPackageSchedule(vehicle, remainingPackagesArray) {
     0,
     0
   );
-  const packagesWithDeliveryTime = updateDeliveryTimeforPackages(
-    packageObject.maximised_packages,
-    vehicle
-  );
-  const vehicleMaxDeliveryTime = findMaxDeliveryTime(packagesWithDeliveryTime);
-  console.log(packagesWithDeliveryTime, "new package");
-  console.log(vehicleMaxDeliveryTime, "max delivery time");
-  let remainingPackages = remainingPackagesArray.filter(
-    (unsortedPackage) =>
-      !packageObject.maximised_packages.includes(unsortedPackage)
-  );
-  return {
-    packagesWithDeliveryTime,
-    remainingPackages,
-    vehicleMaxDeliveryTime,
-  };
 }
 
 export function initializeVehicleswithAvailabilityTime(vehicles) {
@@ -183,10 +172,14 @@ export function getMaximumNumberOfPackages(
 
 export function updateDeliveryTimeforPackages(packages, vehicle) {
   return packages.map((_package) => {
-    const deliveryTime = (_package.distance / vehicle.max_speed).toFixed(2);
-    const _packageValues = Object.values(_package);
+    const deliveryTime = parseFloat(
+      (
+        vehicle.available_after_time +
+        _package.distance / vehicle.max_speed
+      ).toFixed(2)
+    );
     return new packagesWithDeliveryTime(
-      ..._packageValues,
+      ...Object.values(_package),
       deliveryTime,
       vehicle.id
     );
