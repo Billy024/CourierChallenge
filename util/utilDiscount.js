@@ -29,12 +29,12 @@ export function canUseOfferCode(
     });
 
   if (validity.length == 0) {
-    console.error(`OfferCode: ${offer_code} is invalid`);
+    console.warn(`OfferCode: ${offer_code} is invalid`);
     return false;
   }
 
   if (validity.length > 1) {
-    console.error(`Duplicated OfferCode:${offer_code} found`);
+    console.warn(`Duplicated OfferCode:${offer_code} found`);
     return false;
   }
   return validity[0];
@@ -48,5 +48,5 @@ export function getDiscountAmount(
   const discountPercentage = available_offer_codes.filter(
     (availableOfferCode) => availableOfferCode.name == offer_code
   )[0].discountPercentage;
-  return parseFloat(((discountPercentage / 100) * total_cost).toFixed(2));
+  return Math.floor((discountPercentage / 100) * total_cost * 100) / 100;
 }

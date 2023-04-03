@@ -32,7 +32,6 @@ export function getDeliverySortedPackages(vehicles, packagesArray) {
     vehiclesWithAvailability[0].available_after_time = findMaxDeliveryTime(
       packagesWithDeliveryTime
     );
-    console.log(vehiclesWithAvailability, "vehiclesWithAvailability");
     unsortedPackages = unsortedPackages.filter((unsortedPackage) => {
       return !packageObject.maximised_packages.includes(unsortedPackage);
     });
@@ -40,7 +39,6 @@ export function getDeliverySortedPackages(vehicles, packagesArray) {
       ...deliverySortedPackages,
       ...packagesWithDeliveryTime,
     ];
-    console.log(deliverySortedPackages, "deliverySortedPackages");
   }
   return deliverySortedPackages;
 }

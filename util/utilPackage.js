@@ -11,7 +11,7 @@ export function getPackageDetail(package_array_string) {
 export function filterOverweightPackages(packagesArray, maxCarriableWeight) {
   return packagesArray.filter((_package) => {
     if (_package.weight > maxCarriableWeight) {
-      console.error(
+      console.warn(
         `Package id: ${_package.id} is overweight and cannot be delivered`
       );
     }
@@ -89,12 +89,11 @@ export function getMaximumNumberOfPackages(
 
 export function updateDeliveryTimeforPackages(packages, vehicle) {
   let updatedPackages = packages.map((_package) => {
-    const deliveryTime = parseFloat(
-      (
-        vehicle.available_after_time +
-        _package.distance / vehicle.max_speed
-      ).toFixed(2)
-    );
+    const deliveryTime =
+      Math.floor(
+        (vehicle.available_after_time + _package.distance / vehicle.max_speed) *
+          100
+      ) / 100;
     return new packagesWithDeliveryTime(
       ...Object.values(_package),
       deliveryTime,
@@ -122,6 +121,5 @@ export function getPackageSchedule(vehicle, remainingPackagesArray) {
     0,
     0
   );
-  // console.log(packagesWithMaximumWeight, "packagesWithMaximumWeight");
   return packagesWithMaximumWeight;
 }

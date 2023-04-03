@@ -8,7 +8,9 @@ export async function promptQuestion(question) {
       return Object.values(answer);
     })
     .catch((err) => {
-      console.error(`ERROR: ${err}`);
+      console.error(
+        `ERROR in prompting for Question: ${question}, ERROR: ${err}`
+      );
     });
 }
 

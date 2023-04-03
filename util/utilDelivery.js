@@ -12,7 +12,5 @@ export function findMaxDeliveryTime(packages) {
       ? _package.delivery_time
       : maxDeliveryTime;
   }, 0);
-  console.log(oneWayMaxDeliveryTime, "oneWayMaxDeliveryTime");
-
   return oneWayMaxDeliveryTime * 2;
 }
