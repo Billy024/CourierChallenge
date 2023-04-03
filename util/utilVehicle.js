@@ -157,17 +157,16 @@ export function getMaximumNumberOfPackages(
   packagesArray.sort((a, b) => {
     return a.weight - b.weight;
   });
-  let sum_of_weight = 0;
-  let no_of_packages = 0;
-  packagesArray.map((_package) => {
-    let new_weight = sum_of_weight + _package.weight;
-    if (new_weight < max_carriable_weight) {
-      no_of_packages += 1;
-      sum_of_weight += _package.weight;
-      return;
-    }
-  });
-  return no_of_packages;
+  return packagesArray.reduce(
+    (sum, _package) => {
+      if (sum.weight + _package.weight <= max_carriable_weight) {
+        sum.weight += _package.weight;
+        sum.count++;
+      }
+      return sum;
+    },
+    { weight: 0, count: 0 }
+  ).count;
 }
 
 export function updateDeliveryTimeforPackages(packages, vehicle) {
