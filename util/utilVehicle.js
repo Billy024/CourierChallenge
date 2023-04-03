@@ -26,9 +26,11 @@ export function sortPackages(vehicles, packagesArray) {
   // //need to rectify while loop
   while (unsortedPackages.length != 0) {
     let sortedPackages = getPackageSchedule(vehicles, unsortedPackages);
+    console.log(sortedPackages, "sorted");
     unsortedPackages = unsortedPackages.filter(
       (_package) => !sortedPackages.includes(_package)
     );
+    console.log(unsortedPackages, "unsorted");
   }
   //   let deliverySortedPackages = sortPackages(vehicleDataArray, packageDataArray);
   //   i++;
@@ -64,7 +66,10 @@ export function getPackageSchedule(vehicles, packagesArray) {
     tempPackagesArray = tempPackagesArray.filter(
       (tempPackage) => !packageObject.maximised_packages.includes(tempPackage)
     );
-    totalSortedPackages.push(packageObject.maximised_packages);
+    totalSortedPackages = [
+      ...totalSortedPackages,
+      ...packageObject.maximised_packages,
+    ];
   });
   return totalSortedPackages;
 }
