@@ -85,7 +85,7 @@ export function getDiscountAmount(
   const discountPercentage = available_offer_codes.filter(
     (availableOfferCode) => availableOfferCode.name == offer_code
   )[0].discountPercentage;
-  return (discountPercentage / 100) * total_cost;
+  return parseFloat(((discountPercentage / 100) * total_cost).toFixed(2));
 }
 
 export function outputDiscountAndTotalCost(discountAndTotalCost) {
