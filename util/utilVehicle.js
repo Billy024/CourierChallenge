@@ -30,59 +30,28 @@ export function sortPackages(vehicles, packagesArray) {
     initializeVehicleswithAvailabilityTime(vehicles);
 
   while (unsortedPackages.length != 0) {
-    vehiclesWithAvailability = sortVehiclesByAvailableAfterTime(
+    let sortedVehiclesWithAvailability = sortVehiclesByAvailableAfterTime(
       vehiclesWithAvailability
     );
-    let unsortedPackages = getPackageSchedule(
-      vehiclesWithAvailability[0],
-      unsortedPackages
-    );
-    vehiclesWithAvailability = updateVehicleswithAvailabilityTime(
-      vehiclesWithAvailability,
-      vehicle_id, //from package
-      new_available_after_time //from package
-    );
-
-    // unsortedPackages = unsortedPackages.filter(
-    //   (_package) => !sortedPackages.includes(_package)
-    // );
+    let {
+      packagesWithDeliveryTime,
+      remainingPackages,
+      vehicleMaxDeliveryTime,
+    } = getPackageSchedule(sortedVehiclesWithAvailability[0], unsortedPackages);
+    sortedVehiclesWithAvailability[0].available_after_time =
+      vehicleMaxDeliveryTime;
+    unsortedPackages = remainingPackages;
+    vehiclesWithAvailability = sortedVehiclesWithAvailability;
   }
-  //need to handle delivery time of packages here
 }
 
-export function initializeVehicleswithAvailabilityTime(vehicles) {
-  available_after_time = 0;
-  vehicles.map((vehicle) => {
-    vehicleValues = Object.values(vehicle);
-    return new vehicleWithDeliveryTime(...vehicleValues, available_after_time);
-  });
-}
-
-export function updateVehicleswithAvailabilityTime(
-  vehicles,
-  vehicle_id,
-  new_available_after_time
-) {
-  return vehicles.map((vehicle) => {
-    if (vehicle.id == vehicle_id) {
-      vehicle.available_after_time = new_available_after_time;
-    }
-  });
-}
-
-export function sortVehiclesByAvailableAfterTime(vehicles) {
-  return vehicles.sort((a, b) => {
-    a.available_after_time - b.available_after_time;
-  });
-}
-
-export function getPackageSchedule(vehicle, unsortedPackagesArray) {
+export function getPackageSchedule(vehicle, remainingPackagesArray) {
   const maximumNoOfPackages = getMaximumNumberOfPackages(
     vehicle.max_carriable_weight,
-    unsortedPackagesArray
+    remainingPackagesArray
   );
   let descendingPackageArray = sortPackagesByWeightAndDistance(
-    unsortedPackagesArray
+    remainingPackagesArray
   );
   let maximisedPackages = [];
   const packageObject = findPackagesForMaximumWeight(
@@ -101,20 +70,46 @@ export function getPackageSchedule(vehicle, unsortedPackagesArray) {
   const vehicleMaxDeliveryTime = findMaxDeliveryTime(packagesWithDeliveryTime);
   console.log(packagesWithDeliveryTime, "new package");
   console.log(vehicleMaxDeliveryTime, "max delivery time");
-  unsortedPackagesArray = unsortedPackagesArray.filter(
+  let remainingPackages = remainingPackagesArray.filter(
     (unsortedPackage) =>
       !packageObject.maximised_packages.includes(unsortedPackage)
   );
   return {
     packagesWithDeliveryTime,
-    unsortedPackagesArray,
+    remainingPackages,
     vehicleMaxDeliveryTime,
   };
 }
 
+export function initializeVehicleswithAvailabilityTime(vehicles) {
+  let available_after_time = 0;
+  return vehicles.map((vehicle) => {
+    let vehicleValues = Object.values(vehicle);
+    return new vehicleWithDeliveryTime(...vehicleValues, available_after_time);
+  });
+}
+
+export function updateVehiclesWithAvailabilityTime(
+  vehicles,
+  vehicle_id,
+  new_available_after_time
+) {
+  return vehicles.map((vehicle) => {
+    if (vehicle.id == vehicle_id) {
+      vehicle.available_after_time = new_available_after_time;
+    }
+  });
+}
+
+export function sortVehiclesByAvailableAfterTime(vehicles) {
+  return vehicles.sort((a, b) => {
+    a.available_after_time - b.available_after_time;
+  });
+}
+
 export function findMaxDeliveryTime(packages) {
-  const maxDeliveryTime = packages.reduce((max, _package) => {
-    return _package.deliveryTime > max ? _package.deliveryTime : max;
+  return packages.reduce((max, _package) => {
+    return _package.delivery_time > max ? _package.delivery_time : max;
   }, 0);
 }
 
