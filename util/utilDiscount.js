@@ -90,10 +90,12 @@ export function getDiscountAmount(
 
 export function outputDiscountAndTotalCost(discountAndTotalCost) {
   discountAndTotalCost.map((eachPackage) => {
-    let outputString = "";
-    Object.values(eachPackage).map((outputItem) => {
-      outputString += `${outputItem} `;
-    });
-    console.log(outputString.trim());
+    let finalString = Object.values(eachPackage).reduce(
+      (outputString, outputItem) => {
+        return (outputString += `${outputItem} `);
+      },
+      ""
+    );
+    console.log(finalString.trim());
   });
 }
