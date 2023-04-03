@@ -15,3 +15,26 @@ export async function promptQuestion(question) {
 export function splitStringtoArray(prompt_answer, input_quantity) {
   return Object.values(prompt_answer)[0].trim().split(" ", input_quantity);
 }
+
+export function outputDiscountAndTotalCost(
+  discountAndTotalCost,
+  deliverySortedPackages
+) {
+  discountAndTotalCost.map((eachPackage) => {
+    let thisDeliverySortedPackage = getDeliverySortedPackage(
+      deliverySortedPackages,
+      eachPackage.package_id
+    );
+    let finalString =
+      Object.values(eachPackage).reduce((outputString, outputItem) => {
+        return (outputString += `${outputItem} `);
+      }, "") + `${thisDeliverySortedPackage?.delivery_time}`;
+    console.log(finalString.trim());
+  });
+}
+
+export function getDeliverySortedPackage(deliverySortedPackages, package_id) {
+  return deliverySortedPackages.filter(
+    (deliverySortedPackage) => deliverySortedPackage.id == package_id
+  )[0];
+}

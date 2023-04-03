@@ -6,19 +6,13 @@ import {
   VEHICLE_INPUT_QUANTITY,
   VEHICLE_QUESTION,
 } from "./constants.js";
-import { _package } from "./model.js";
 import { offerCodes } from "./offerCodes.js";
-import { getDeliveryData } from "./util/utilDelivery.js";
-import {
-  getDiscountAndTotalCost,
-  outputDiscountAndTotalCost,
-} from "./util/utilDiscount.js";
-import { getPackagesData } from "./util/utilPackage.js";
-import {
-  getPackageSchedule,
-  getVehicleData,
-  sortPackages,
-} from "./util/utilVehicle.js";
+import { getDeliveryData } from "./util/getDeliveryData.js";
+import { getDeliverySortedPackages } from "./util/getDeliverySortedPackages.js";
+import { getDiscountAndTotalCost } from "./util/getDiscountAndTotalCost.js";
+import { getPackagesData } from "./util/getPackagesData.js";
+import { getVehicleData } from "./util/getVehicleData.js";
+import { outputDiscountAndTotalCost } from "./util/utilShared.js";
 
 const deliveryData = await getDeliveryData(
   DELIVERY_QUESTION,
@@ -41,7 +35,9 @@ const discountAndTotalCost = getDiscountAndTotalCost(
   offerCodes
 );
 
-let deliverySortedPackages = sortPackages(vehicleDataArray, packageDataArray);
-//need to handle delivery time of packages here
+let deliverySortedPackages = getDeliverySortedPackages(
+  vehicleDataArray,
+  packageDataArray
+);
 
 outputDiscountAndTotalCost(discountAndTotalCost, deliverySortedPackages);
