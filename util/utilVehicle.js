@@ -71,22 +71,8 @@ export function getPackageSchedule(vehicle, remainingPackagesArray) {
 }
 
 export function initializeVehicleswithAvailabilityTime(vehicles) {
-  let available_after_time = 0;
   return vehicles.map((vehicle) => {
-    let vehicleValues = Object.values(vehicle);
-    return new vehicleWithDeliveryTime(...vehicleValues, available_after_time);
-  });
-}
-
-export function updateVehiclesWithAvailabilityTime(
-  vehicles,
-  vehicle_id,
-  new_available_after_time
-) {
-  return vehicles.map((vehicle) => {
-    if (vehicle.id == vehicle_id) {
-      vehicle.available_after_time = new_available_after_time;
-    }
+    return new vehicleWithDeliveryTime(...Object.values(vehicle), 0);
   });
 }
 
@@ -97,8 +83,10 @@ export function sortVehiclesByAvailableAfterTime(vehicles) {
 }
 
 export function findMaxDeliveryTime(packages) {
-  return packages.reduce((max, _package) => {
-    return _package.delivery_time > max ? _package.delivery_time : max;
+  return packages.reduce((maxDeliveryTime, _package) => {
+    return _package.delivery_time > maxDeliveryTime
+      ? _package.delivery_time
+      : maxDeliveryTime;
   }, 0);
 }
 
