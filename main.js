@@ -24,23 +24,19 @@ const packageDataArray = await terminal._getPackagesData(
   PACKAGE_QUESTION,
   PACKAGE_INPUT_QUANTITY
 );
-
 const vehicleDataArray = await terminal._getVehicleData(
   VEHICLE_QUESTION,
   VEHICLE_INPUT_QUANTITY
 );
-
 const discountAndTotalCost = costCalculator._getDiscountAndTotalCost(
   packageDataArray,
   deliveryData.base_delivery_cost,
   offerCodes
 );
-
 let deliverySortedPackages = deliverySorter._getDeliverySortedPackages(
   vehicleDataArray,
   packageDataArray
 );
-
 terminal._outputDiscountAndTotalCost(
   discountAndTotalCost,
   deliverySortedPackages

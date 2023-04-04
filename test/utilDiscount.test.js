@@ -1,6 +1,13 @@
 import { expect as _expect } from "chai";
-import { discountedCost } from "../models/discountedCost";
-import { _package } from "../models/package";
+import { discountedCost } from "../models/discountedCost.js";
+import { _package } from "../models/package.js";
+import { getDiscountAndTotalCost } from "../services/discount/getDiscountAndTotalCost.js";
+import {
+  getDeliveryCost,
+  getDiscountAmount,
+} from "../services/discount/utilDiscount.js";
+import { canUseOfferCode } from "../services/discount/canUseOfferCode.js";
+import { offerCodes } from "../offerCodes.js";
 const expect = _expect;
 
 describe("discountUtils", function () {

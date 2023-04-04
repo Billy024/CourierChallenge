@@ -1,5 +1,6 @@
 import { expect as _expect } from "chai";
-import { vehicle } from "../models/vehicle";
+import { vehicle } from "../models/vehicle.js";
+import { getVehicleDetail } from "../services/vehicles/getVehicleDetail.js";
 const expect = _expect;
 
 describe("vehicleUtils", function () {
@@ -14,13 +15,16 @@ describe("vehicleUtils", function () {
         `${max_speed}`,
         `${max_carriable_weight}`,
       ];
-      const vehicleObject = getVehicleDetail(arrayOfString);
-      const expectedVehicleObject = new vehicle(
-        no_of_vehicles,
-        max_speed,
-        max_carriable_weight
-      );
-      expect(vehicleObject).to.deep.equal(expectedVehicleObject);
+      const vehicleArray = getVehicleDetail(arrayOfString);
+      let expectedVehicleArray = [];
+
+      for (let _vehicle = 0; _vehicle < no_of_vehicles; _vehicle++) {
+        expectedVehicleArray.push(
+          new vehicle(max_speed, max_carriable_weight, _vehicle + 1)
+        );
+      }
+
+      expect(vehicleArray).to.deep.equal(expectedVehicleArray);
       done();
     });
   });

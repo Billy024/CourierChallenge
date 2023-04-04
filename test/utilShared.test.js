@@ -1,4 +1,5 @@
 import { expect as _expect } from "chai";
+import { splitStringtoArray } from "../services/terminal/utilTerminal.js";
 const expect = _expect;
 
 describe("sharedUtils", function () {
