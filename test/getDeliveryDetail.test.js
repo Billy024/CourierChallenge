@@ -3,7 +3,7 @@ import { getDeliveryDetail } from "../services/delivery/getDeliveryDetail.js";
 import { delivery } from "../models/delivery.js";
 const expect = _expect;
 
-describe("deliveryUtils", function () {
+describe("getDeliveryDetail", function () {
   describe("get Delivery Detail", function () {
     it("should get delivery object from array of string", function (done) {
       const value1 = 90;

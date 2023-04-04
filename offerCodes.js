@@ -1,20 +1,4 @@
-export class offerCode {
-  constructor(
-    name,
-    minDistance,
-    maxDistance,
-    minWeight,
-    maxWeight,
-    discountPercentage
-  ) {
-    this.name = name;
-    this.minDistance = minDistance;
-    this.maxDistance = maxDistance;
-    this.minWeight = minWeight;
-    this.maxWeight = maxWeight;
-    this.discountPercentage = discountPercentage;
-  }
-}
+import { offerCode } from "./models/offerCode.js";
 
 export const offerCodes = [
   new offerCode("OFR001", 0, 200, 70, 200, 10),
