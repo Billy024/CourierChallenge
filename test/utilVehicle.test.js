@@ -1,4 +1,5 @@
 import { expect as _expect } from "chai";
+import { vehicle } from "../models/vehicle";
 const expect = _expect;
 
 describe("vehicleUtils", function () {

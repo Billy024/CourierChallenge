@@ -1,4 +1,4 @@
-import { _discountedCost } from "../../model.js";
+import { discountedCost } from "../../models/discountedCost.js";
 import { canUseOfferCode } from "./canUseOfferCode.js";
 import { getDeliveryCost, getDiscountAmount } from "./utilDiscount.js";
 
@@ -19,7 +19,7 @@ export function getDiscountAndTotalCost(packagesArray, base_cost, offerCodes) {
         offerCodes
       )
     ) {
-      return costArray.push(new _discountedCost(_package.id, 0, deliveryCost));
+      return costArray.push(new discountedCost(_package.id, 0, deliveryCost));
     }
 
     const discount_amount = getDiscountAmount(
@@ -29,7 +29,7 @@ export function getDiscountAndTotalCost(packagesArray, base_cost, offerCodes) {
     );
 
     costArray.push(
-      new _discountedCost(
+      new discountedCost(
         _package.id,
         discount_amount,
         deliveryCost - discount_amount

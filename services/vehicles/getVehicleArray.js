@@ -1,4 +1,4 @@
-import { vehicle } from "../../model.js";
+import { vehicle } from "../../models/vehicle";
 
 export function getVehicleArray(vehicle_array_string) {
   const vehicle_array_int = vehicle_array_string.map((str) => parseInt(str));

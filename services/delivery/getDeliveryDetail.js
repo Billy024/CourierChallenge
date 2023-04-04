@@ -1,4 +1,4 @@
-import { delivery } from "../../model.js";
+import { delivery } from "../../models/delivery";
 
 export function getDeliveryDetail(delivery_array_string) {
   const delivery_array_int = delivery_array_string.map((str) => parseInt(str));

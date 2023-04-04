@@ -1,4 +1,6 @@
 import { expect as _expect } from "chai";
+import { discountedCost } from "../models/discountedCost";
+import { _package } from "../models/package";
 const expect = _expect;
 
 describe("discountUtils", function () {
@@ -33,17 +35,17 @@ describe("discountUtils", function () {
       let expectedDiscountedCostObject = [];
 
       expectedDiscountedCostObject.push(
-        new _discountedCost(
+        new discountedCost(
           packagesArray[0].id,
           (10 / 100) * deliveryCost1,
           deliveryCost1 - (10 / 100) * deliveryCost1
         )
       );
       expectedDiscountedCostObject.push(
-        new _discountedCost(packagesArray[1].id, 0, deliveryCost2)
+        new discountedCost(packagesArray[1].id, 0, deliveryCost2)
       );
       expectedDiscountedCostObject.push(
-        new _discountedCost(packagesArray[2].id, 0, deliveryCost3)
+        new discountedCost(packagesArray[2].id, 0, deliveryCost3)
       );
       expect(discountedCostObject).to.deep.equal(expectedDiscountedCostObject);
       done();
