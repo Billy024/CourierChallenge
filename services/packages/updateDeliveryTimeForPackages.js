@@ -1,4 +1,4 @@
-import { packagesWithDeliveryTime } from "../../models/packagesWithDeliveryTime";
+import { packagesWithDeliveryTime } from "../../models/packagesWithDeliveryTime.js";
 
 export function updateDeliveryTimeForPackages(packages, vehicle) {
   let updatedPackages = packages.map((_package) => {

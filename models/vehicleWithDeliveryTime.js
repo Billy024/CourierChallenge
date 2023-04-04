@@ -1,4 +1,4 @@
-import { vehicle } from "./vehicle";
+import { vehicle } from "./vehicle.js";
 
 export class vehicleWithDeliveryTime extends vehicle {
   constructor(max_speed, max_carriable_weight, id, available_after_time) {

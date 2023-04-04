@@ -6,38 +6,42 @@ import {
   VEHICLE_INPUT_QUANTITY,
   VEHICLE_QUESTION,
 } from "./constants.js";
-import { getPackagesData } from "./services/packages/getPackagesData.js";
-import { getDeliveryData } from "./services/delivery/getDeliveryData.js";
-import { getVehicleData } from "./services/vehicles/getVehicleData.js";
-import { getDiscountAndTotalCost } from "./services/discount/getDiscountAndTotalCost.js";
-import { getDeliverySortedPackages } from "./services/deliverySorting/getDeliverySortedPackages.js";
-import { outputDiscountAndTotalCost } from "./services/terminal/outputDiscountAndTotalCost.js";
 import { offerCodes } from "./offerCodes.js";
+import { terminalController } from "./controllers/terminalController.js";
+import { deliverySortingController } from "./controllers/deliverySortingController.js";
+import { costCalculatingController } from "./controllers/costCalculatingController.js";
 
-const deliveryData = await getDeliveryData(
+const terminal = new terminalController();
+const deliverySorter = new deliverySortingController();
+const costCalculator = new costCalculatingController();
+
+const deliveryData = await terminal._getDeliveryData(
   DELIVERY_QUESTION,
   DETAIL_INPUT_QUANTITY
 );
-const packageDataArray = await getPackagesData(
+const packageDataArray = await terminal._getPackagesData(
   deliveryData.no_of_packages,
   PACKAGE_QUESTION,
   PACKAGE_INPUT_QUANTITY
 );
 
-const vehicleDataArray = await getVehicleData(
+const vehicleDataArray = await terminal._getVehicleData(
   VEHICLE_QUESTION,
   VEHICLE_INPUT_QUANTITY
 );
 
-const discountAndTotalCost = getDiscountAndTotalCost(
+const discountAndTotalCost = costCalculator._getDiscountAndTotalCost(
   packageDataArray,
   deliveryData.base_delivery_cost,
   offerCodes
 );
 
-let deliverySortedPackages = getDeliverySortedPackages(
+let deliverySortedPackages = deliverySorter._getDeliverySortedPackages(
   vehicleDataArray,
   packageDataArray
 );
 
-outputDiscountAndTotalCost(discountAndTotalCost, deliverySortedPackages);
+terminal._outputDiscountAndTotalCost(
+  discountAndTotalCost,
+  deliverySortedPackages
+);

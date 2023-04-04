@@ -1,4 +1,4 @@
-import { vehicleWithDeliveryTime } from "../../models/vehicleWithDeliveryTime";
+import { vehicleWithDeliveryTime } from "../../models/vehicleWithDeliveryTime.js";
 
 export function initializeVehicleswithAvailabilityTime(vehicles) {
   return vehicles.map((vehicle) => {

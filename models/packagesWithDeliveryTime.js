@@ -1,4 +1,4 @@
-import { _package } from "./package";
+import { _package } from "./package.js";
 
 export class packagesWithDeliveryTime extends _package {
   constructor(id, weight, distance, offer_code, delivery_time, vehicle_id) {

@@ -1,4 +1,4 @@
-import { _package } from "../../models/package";
+import { _package } from "../../models/package.js";
 
 export function getPackageDetail(package_array_string) {
   const id = package_array_string[0];
