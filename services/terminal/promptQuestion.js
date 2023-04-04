@@ -1,3 +1,5 @@
+import inquirer from "inquirer";
+
 export async function promptQuestion(question) {
   return await inquirer
     .prompt(question)

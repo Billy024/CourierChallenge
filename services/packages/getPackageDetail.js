@@ -1,3 +1,5 @@
+import { _package } from "../../model.js";
+
 export function getPackageDetail(package_array_string) {
   const id = package_array_string[0];
   const weight = parseInt(package_array_string[1]);

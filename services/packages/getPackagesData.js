@@ -1,6 +1,6 @@
-import { promptQuestion } from "../Terminal/promptQuestion.js";
-import { splitStringtoArray } from "../Terminal/utilTerminal.js";
-import { getPackageDetail } from "./getPackageDetail.js";
+import { promptQuestion } from "../terminal/promptQuestion.js";
+import { splitStringtoArray } from "../terminal/utilTerminal.js";
+import { getPackageDetail } from "../packages/getPackageDetail.js";
 
 export async function getPackagesData(
   no_of_packages,

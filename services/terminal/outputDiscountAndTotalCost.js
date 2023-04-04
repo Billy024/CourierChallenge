@@ -1,3 +1,5 @@
+import { getDeliverySortedPackageWithPackageId } from "./utilTerminal.js";
+
 export function outputDiscountAndTotalCost(
   discountAndTotalCost,
   deliverySortedPackages
