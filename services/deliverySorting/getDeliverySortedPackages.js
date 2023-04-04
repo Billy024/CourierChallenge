@@ -1,14 +1,3 @@
-import { findMaxDeliveryTime } from "./utilDelivery.js";
-import {
-  filterOverweightPackages,
-  getPackageSchedule,
-  updateDeliveryTimeforPackages,
-} from "./utilPackage.js";
-import {
-  initializeVehicleswithAvailabilityTime,
-  sortVehiclesByAvailableAfterTime,
-} from "./utilVehicle.js";
-
 export function getDeliverySortedPackages(vehicles, packagesArray) {
   let vehiclesWithAvailability =
     initializeVehicleswithAvailabilityTime(vehicles);
@@ -17,6 +6,8 @@ export function getDeliverySortedPackages(vehicles, packagesArray) {
     vehicles[0].max_carriable_weight
   );
   let deliverySortedPackages = [];
+
+  //looping through unsorted packages till all packages are sorted
   while (unsortedPackages.length != 0) {
     vehiclesWithAvailability = sortVehiclesByAvailableAfterTime(
       vehiclesWithAvailability
@@ -25,7 +16,7 @@ export function getDeliverySortedPackages(vehicles, packagesArray) {
       vehiclesWithAvailability[0],
       unsortedPackages
     );
-    const packagesWithDeliveryTime = updateDeliveryTimeforPackages(
+    const packagesWithDeliveryTime = updateDeliveryTimeForPackages(
       packageObject.maximised_packages,
       vehiclesWithAvailability[0]
     );
@@ -40,5 +31,6 @@ export function getDeliverySortedPackages(vehicles, packagesArray) {
       ...packagesWithDeliveryTime,
     ];
   }
+
   return deliverySortedPackages;
 }

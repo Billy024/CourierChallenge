@@ -1,12 +1,4 @@
 import { expect as _expect } from "chai";
-import { _discountedCost, _package } from "../model.js";
-import { offerCodes } from "../offerCodes.js";
-import {
-  canUseOfferCode,
-  getDeliveryCost,
-  getDiscountAmount,
-  getDiscountAndTotalCost,
-} from "../util/utilDiscount.js";
 const expect = _expect;
 
 describe("discountUtils", function () {

@@ -1,10 +1,3 @@
-import { _discountedCost } from "../model.js";
-import {
-  canUseOfferCode,
-  getDeliveryCost,
-  getDiscountAmount,
-} from "./utilDiscount.js";
-
 export function getDiscountAndTotalCost(packagesArray, base_cost, offerCodes) {
   let costArray = [];
   packagesArray.map((_package) => {

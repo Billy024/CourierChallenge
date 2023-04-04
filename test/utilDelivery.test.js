@@ -1,6 +1,4 @@
 import { expect as _expect } from "chai";
-import { delivery } from "../model.js";
-import { getDeliveryDetail } from "../util/utilDelivery.js";
 const expect = _expect;
 
 describe("deliveryUtils", function () {
