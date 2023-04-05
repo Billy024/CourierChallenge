@@ -1,6 +1,6 @@
 import { findPackagesForMaximumWeight } from "./findPackagesForMaximumWeight.js";
+import { sortPackagesByWeightAndDistance } from "../packages/utilPackage.js";
 import { getMaximumNumberOfPackages } from "./getMaximumNumberOfPackages.js";
-import { sortPackagesByWeightAndDistance } from "./utilPackage.js";
 
 export function getPackageSchedule(vehicle, remainingPackagesArray) {
   const maximumNoOfPackages = getMaximumNumberOfPackages(

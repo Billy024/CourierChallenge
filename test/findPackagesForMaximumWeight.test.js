@@ -1,8 +1,8 @@
 import { expect as _expect } from "chai";
 import { _package } from "../models/package.js";
-import { findPackagesForMaximumWeight } from "../services/packages/findPackagesForMaximumWeight.js";
-import { getMaximumNumberOfPackages } from "../services/packages/getMaximumNumberOfPackages.js";
+import { getMaximumNumberOfPackages } from "../services/deliverySorting/getMaximumNumberOfPackages.js";
 import { sortPackagesByWeightAndDistance } from "../services/packages/utilPackage.js";
+import { findPackagesForMaximumWeight } from "../services/deliverySorting/findPackagesForMaximumWeight.js";
 
 const expect = _expect;
 

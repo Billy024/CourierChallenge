@@ -1,9 +1,8 @@
 import { expect as _expect } from "chai";
 import { _package } from "../models/package.js";
-import { getPackageDetail } from "../services/packages/getPackageDetail.js";
-import { updateDeliveryTimeForPackages } from "../services/packages/updateDeliveryTimeForPackages.js";
 import { vehicleWithDeliveryTime } from "../models/vehicleWithDeliveryTime.js";
 import { packagesWithDeliveryTime } from "../models/packagesWithDeliveryTime.js";
+import { updateDeliveryTimeForPackages } from "../services/deliverySorting/updateDeliveryTimeForPackages.js";
 
 const expect = _expect;
 

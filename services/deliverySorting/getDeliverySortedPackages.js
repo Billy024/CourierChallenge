@@ -1,11 +1,11 @@
 import { deliverySortingController } from "../../controllers/deliverySortingController.js";
-import { getPackageSchedule } from "../packages/getPackageSchedule.js";
-import { updateDeliveryTimeForPackages } from "../packages/updateDeliveryTimeForPackages.js";
 import { filterOverweightPackages } from "../packages/utilPackage.js";
 import {
   initializeVehicleswithAvailabilityTime,
   sortVehiclesByAvailableAfterTime,
 } from "../vehicles/utilVehicle.js";
+import { getPackageSchedule } from "./getPackageSchedule.js";
+import { updateDeliveryTimeForPackages } from "./updateDeliveryTimeForPackages.js";
 
 export function getDeliverySortedPackages(vehicles, packagesArray) {
   const deliverySorter = new deliverySortingController();

@@ -1,4 +1,5 @@
 import { findMaxDeliveryTime } from "../services/deliverySorting/findMaxDeliveryTime.js";
+import { findPackagesForMaximumWeight } from "../services/deliverySorting/findPackagesForMaximumWeight.js";
 import { getDeliverySortedPackages } from "../services/deliverySorting/getDeliverySortedPackages.js";
 
 export class deliverySortingController {
