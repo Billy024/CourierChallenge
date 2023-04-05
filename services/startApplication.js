@@ -49,13 +49,11 @@ export async function startApplication() {
     deliveryData.base_delivery_cost,
     offerCodes
   );
-  console.log(discountAndTotalCost, "discountAndTotalCost");
 
   let deliverySortedPackages = deliverySorter._getDeliverySortedPackages(
     vehicleData,
     packageData
   );
-  console.log(deliverySortedPackages, "deliverySortedPackages");
 
   terminal._outputDiscountAndTotalCost(
     discountAndTotalCost,

@@ -12,7 +12,7 @@ export function findPackagesForMaximumWeight(
       continue;
     }
     let new_weight_sum = sum_of_weight + descendingPackageArray[p].weight;
-    if (new_weight_sum < max_carriable_weight) {
+    if (new_weight_sum <= max_carriable_weight) {
       let new_sum_of_packages = sum_of_packages + 1;
       let new_maximised_packages = [
         ...maximised_packages,
