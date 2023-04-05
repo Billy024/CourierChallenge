@@ -24,7 +24,7 @@ export function canUseOfferCode(
       return true;
     });
 
-  if (validity.length == 0) {
+  if (validity.length == 0 && offer_code != "NA") {
     console.warn(`OfferCode: ${offer_code} is invalid`);
     return false;
   }
