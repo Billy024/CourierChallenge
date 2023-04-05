@@ -15,14 +15,15 @@ describe("getDeliveryData", function () {
     async function promptFn() {
       return [promptAnswer];
     }
-
     const result = await getDeliveryData(
       deliveryQuestion,
       inputQuantity,
       promptFn
     );
-    expect(result).to.deep.equal(
-      getDeliveryDetail([promptAnswer1, promptAnswer2])
-    );
+    const deliveryDetail = getDeliveryDetail([promptAnswer1, promptAnswer2]);
+    expect(result).to.deep.equal({
+      deliveryData: deliveryDetail,
+      validDeliveryInput: true,
+    });
   });
 });

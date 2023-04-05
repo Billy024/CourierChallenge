@@ -22,8 +22,14 @@ describe("getVehicleData", function () {
       inputQuantity,
       promptFn
     );
-    expect(result).to.deep.equal(
-      getVehicleDetail([promptAnswer1, promptAnswer2, promptAnswer3])
-    );
+    const vehicleDetail = getVehicleDetail([
+      promptAnswer1,
+      promptAnswer2,
+      promptAnswer3,
+    ]);
+    expect(result).to.deep.equal({
+      vehicleData: vehicleDetail,
+      validVehicleInput: true,
+    });
   });
 });

@@ -7,7 +7,12 @@ export async function getDeliveryData(
   input_quantity,
   promptFn = promptQuestion
 ) {
+  let validInput = true;
   const deliveryAnswer = await promptFn(delivery_question);
   const deliveryArray = splitStringtoArray(deliveryAnswer, input_quantity);
-  return getDeliveryDetail(deliveryArray);
+  if (deliveryArray.length != input_quantity) {
+    validInput = false;
+  }
+  const deliveryDetail = getDeliveryDetail(deliveryArray);
+  return { deliveryData: deliveryDetail, validDeliveryInput: validInput };
 }

@@ -8,12 +8,16 @@ export async function getPackagesData(
   input_quantity,
   promptFn = promptQuestion
 ) {
-  let packagesData = [];
+  let validInput = true;
+  let packagesDetail = [];
   for (let i = 0; i < no_of_packages; i++) {
     const packageAnswer = await promptFn(package_question);
     const packageArray = splitStringtoArray(packageAnswer, input_quantity);
-    const packageData = getPackageDetail(packageArray);
-    packagesData.push(packageData);
+    if (packageArray.length != input_quantity) {
+      validInput = false;
+    }
+    const packageDetail = getPackageDetail(packageArray);
+    packagesDetail.push(packageDetail);
   }
-  return packagesData;
+  return { packageData: packagesDetail, validPackageInput: validInput };
 }

@@ -7,7 +7,12 @@ export async function getVehicleData(
   input_quantity,
   promptFn = promptQuestion
 ) {
+  let validInput = true;
   const vehicleAnswer = await promptFn(vehicle_question);
-  const vehicleStringArray = splitStringtoArray(vehicleAnswer, input_quantity);
-  return getVehicleDetail(vehicleStringArray);
+  const vehicleArray = splitStringtoArray(vehicleAnswer, input_quantity);
+  if (vehicleArray.length != input_quantity) {
+    validInput = false;
+  }
+  const vehicleDetail = getVehicleDetail(vehicleArray);
+  return { vehicleData: vehicleDetail, validVehicleInput: validInput };
 }

@@ -6,8 +6,8 @@ import { getPackageDetail } from "../services/packages/getPackageDetail.js";
 
 const expect = _expect;
 
-describe("getPackageData", function () {
-  it("should get get packages from user input", async function () {
+describe("getPackagesData", function () {
+  it("should get packages from user input", async function () {
     const numberOfPackages = 1;
     const packageQuestion = PACKAGE_QUESTION;
     const inputQuantity = 4;
@@ -27,13 +27,15 @@ describe("getPackageData", function () {
       inputQuantity,
       promptFn
     );
-    expect(result).to.deep.equal([
-      getPackageDetail([
-        promptAnswer1,
-        promptAnswer2,
-        promptAnswer3,
-        promptAnswer4,
-      ]),
+    const packageDetail = getPackageDetail([
+      promptAnswer1,
+      promptAnswer2,
+      promptAnswer3,
+      promptAnswer4,
     ]);
+    expect(result).to.deep.equal({
+      packageData: [packageDetail],
+      validPackageInput: true,
+    });
   });
 });
