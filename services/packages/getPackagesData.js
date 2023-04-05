@@ -6,7 +6,7 @@ export async function getPackagesData(
   no_of_packages,
   package_question,
   input_quantity,
-  promptFn = promptQuestion()
+  promptFn = promptQuestion
 ) {
   let packagesData = [];
   for (let i = 0; i < no_of_packages; i++) {

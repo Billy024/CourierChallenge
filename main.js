@@ -19,11 +19,13 @@ const deliveryData = await terminal._getDeliveryData(
   DELIVERY_QUESTION,
   DETAIL_INPUT_QUANTITY
 );
+
 const packageDataArray = await terminal._getPackagesData(
   deliveryData.no_of_packages,
   PACKAGE_QUESTION,
   PACKAGE_INPUT_QUANTITY
 );
+
 const vehicleDataArray = await terminal._getVehicleData(
   VEHICLE_QUESTION,
   VEHICLE_INPUT_QUANTITY
