@@ -1,7 +1,5 @@
 import { expect as _expect } from "chai";
-import { DELIVERY_QUESTION, VEHICLE_QUESTION } from "../constants.js";
-import { getDeliveryDetail } from "../services/delivery/getDeliveryDetail.js";
-import { getDeliveryData } from "../services/delivery/getDeliveryData.js";
+import { VEHICLE_QUESTION } from "../constants.js";
 import { getVehicleDetail } from "../services/vehicles/getVehicleDetail.js";
 import { getVehicleData } from "../services/vehicles/getVehicleData.js";
 
